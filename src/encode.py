@@ -14,3 +14,4 @@ class Resnet50:
     def resnet50_extract_feat(self, img_path):
         feat = self.image_embedding_pipe(img_path)
         return feat.get()[0]
+

@@ -28,7 +28,7 @@ def extract_features(img_dir, model):
         cache['total'] = total
         for i, img_path in enumerate(img_list):
             try:
-                norm_feat = model.resnet50_extract_feat(img_path)
+                norm_feat = model.resnet50_extract_feat(img_path).tolist()
                 feats.append(norm_feat)
                 names.append(img_path.encode())
                 cache['current'] = i + 1
@@ -62,3 +62,8 @@ def do_load(table_name, image_dir, model, milvus_client):
     #mysql_cli.load_data_to_mysql(table_name, format_data(ids, names))
     #return len(ids)
     return format_data(ids, names)
+
+def imgdir2_vectors(image_dir, model):
+    vectors, names = extract_features(image_dir, model)
+    return vectors
+
